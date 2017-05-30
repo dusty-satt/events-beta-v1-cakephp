@@ -1,0 +1,79 @@
+.seven-cols .col-md-1,
+.seven-cols .col-sm-1,
+.seven-cols .col-xs-1,
+.seven-cols .col-lg-1  {
+	width: 14.285714285714285714285714285714%;
+	*width: 14.285714285714285714285714285714%;
+}
+
+.panel-feature {
+	border-color:  #004d80 !important;
+}
+.panel-feature .panel-heading {
+	color: #FFF;
+	background-color: #005c99;
+	border-color: #004d80;
+}
+.panel-selected {
+	border-color:  #ffe066 !important;
+}
+.panel-selected .panel-heading {
+	color: #000;
+	background-color: #ffe680;
+	border-color: #ffe066;
+}
+.panel-today {
+	border-color:  #ccefff !important;
+}
+.panel-today .panel-heading {
+	color: #000;
+	background-color: #e6f7ff;
+	border-color: #ccefff;
+}
+
+.calendar-panels .panel-heading {
+	max-height: 3vw;
+}
+.calendar-panels .panel {
+	margin-bottom: 0;
+	min-height: 8vw;
+	max-height: 8vw;
+}
+.calendar-panels .col-xs-1,
+.calendar-panels .col-xs-2,
+.calendar-panels .col-xs-10,
+.calendar-panels .container-fluid{
+	padding-left: 0;
+	padding-right: 0;
+}
+.calendar-panels .panel-body {
+	padding: 0;
+}
+.calendar-panels .panel-heading {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.panel-body .well {
+	margin: 0;
+	padding: 1px 4px;
+	border-radius: 0;
+}
+.calendar-panels h1 {
+	font-size: 1.3em;
+	font-weight: 600;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.margin-top-20 {
+	margin-top: 20px;
+}
+
+body {
+	font-size: 14px !important;
+}
+@media (max-width: 1091px) {
+	body {
+		font-size: 11px !important;
+	}
+}
