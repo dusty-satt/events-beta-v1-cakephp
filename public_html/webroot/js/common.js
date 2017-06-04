@@ -24,6 +24,20 @@ function postCalDays(postTarget){
 		}
 	});
 }
+function clearSelectedDays(callback){
+	var selected_days = CalDays["selected_days"];
+	$.each(selected_days, function(key,val){
+		var panel = $("#" + val);
+		var originalPanelClass = $("#" + val + " .panel-heading").attr("data-panel-class");
+		panel.removeClass("panel-feature panel-selected panel-today panel-default")
+			.addClass(originalPanelClass);
+		delete CalDays["selected_days"][val];
+		CalDays["days"][val]["selected"] = false;
+	});
+	if( callback && typeof callback === "function" ) {
+		callback();
+	}
+}
 $( document ).ready(function() {
 	//////////////////////////////////////
 	// ---     Events Functions     --- //
@@ -33,17 +47,22 @@ $( document ).ready(function() {
 		var dataParent = $(this).attr("data-parent");
 		$(dataParent + " .collapse").collapse("hide");
 	});
-	$("#updateEventView").click(function(){
-		var settingField = $(this).attr("data-setting-field");
-		var settingValue = $(this).attr("data-setting-value");
-		Settings[settingField] = settingValue;
+	$(".clearSelectedDays").click(function(){
+		clearSelectedDays();
+	});
+	$(".updateEventView").click(function(){
+		$(".viewEvent").collapse("show");
+		Settings["allowMultipleDaySelect"] = true;
 		var event_group_id = $(this).attr("data-event-group-id");
 		var name = CalDays["eventGroups"][event_group_id]["name"];
 		var days = CalDays["eventGroups"][event_group_id]["days"];
 		$(".eventGroupName").text(name);
-		$.each(days, function(key,val){
-			$("#" + val + " .panel-heading").trigger("click");
+		clearSelectedDays(function(){
+			$.each(days, function(key,val){
+				$("#" + val + " .panel-heading").trigger("click");
+			});
 		});
+		
 		console.log("updateEventView:");
 		console.log(Settings);
 	});
@@ -73,14 +92,12 @@ $( document ).ready(function() {
 		var preferredDateInput = $(target).find(".userDefaultDate");
 		var originalPanelClass = $(this).attr("data-panel-class");
 		if( !Settings.allowMultipleDaySelect ) {
-			$(".panel-selected")
-				.removeClass("panel-selected")
-				.addClass(originalPanelClass);
+			clearSelectedDays();
 		}
 		if ( !CalDays["days"][date]["selected"] ) {
+			CalDays["days"][date]["selected"] = true;
+			CalDays["selected_days"][date] = date;
 			if( Settings.allowMultipleDaySelect ) {
-				CalDays["days"][date]["selected"] = true;
-				CalDays["selected_days"][date] = date;
 				$(preferredDateInput).val(UserPreferences["default_date"]).trigger("change");
 			}
 			if( panelSelected == "panel-selected" ) {
@@ -89,9 +106,9 @@ $( document ).ready(function() {
 					.addClass("panel-selected");
 			}
 		} else {
+			CalDays["days"][date]["selected"] = false;
+			delete CalDays["selected_days"][date];
 			if( Settings.allowMultipleDaySelect ) {
-				CalDays["days"][date]["selected"] = false;
-				delete CalDays["selected_days"][date];
 				$(preferredDateInput).val(null).trigger("change");
 			}
 			$(target)

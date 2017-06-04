@@ -9,7 +9,7 @@ $this->layout = "fuego";
 	};
 </script>
 <div class="container col-md-3 featureWindow">
-	<div class="panel panel-feature collapse in manageDays" data-parent=".featureWindow">
+	<div class="panel panel-feature collapse in" data-parent=".featureWindow">
 		<div class="panel-heading text-center">
 			Welcome, <span class="authUsername"><?= $authUser["username"];?></span>
 		</div>
@@ -42,7 +42,7 @@ $this->layout = "fuego";
 			</p>
 		</div>
 	</div>
-	<div class="panel panel-feature collapse manageDays" id="AddEvent" data-parent=".featureWindow">
+	<div class="panel panel-feature collapse addEvent" data-parent=".featureWindow">
 		<div class="panel-heading text-center">
 			Add a New Event
 		</div>
@@ -50,14 +50,14 @@ $this->layout = "fuego";
 			<!-- Save Event Group -->
 			1) Select all the days you'd like to host this event.<br />
 			2) Optionally, add a preferred start time in each day.
-			<input class="form-control AddEvent" type="text" placeholder="Event Title" name="AddEvent.name" />
+			<input class="form-control addEventInput" type="text" placeholder="Event Title" name="addEventInput.name" />
 			<div class="input-group col-xs-12">
 				<span class="input-group-addon">#</span>
-				<input class="form-control AddEvent" type="number" placeholder="Guest Minimum" name="AddEvent.guest_quota" />
+				<input class="form-control addEventInput" type="number" placeholder="Guest Minimum" name="addEventInput.guest_quota" />
 				<span class="input-group-addon">#</span>
-				<input class="form-control AddEvent" type="number" placeholder="Guest Limit" name="AddEvent.guest_limit" />
+				<input class="form-control addEventInput" type="number" placeholder="Guest Limit" name="addEventInput.guest_limit" />
 			</div>
-			<button class="btn btn-block btn-warning btn-md submitFields" data-input-class=".AddEvent" data-post-target="/events/addEvent" type="submit">Save Event Group</button>
+			<button class="btn btn-block btn-warning btn-md submitFields" data-input-class=".addEventInput" data-post-target="/events/addEvent" type="submit">Save Event Group</button>
 			<!-- Settings -->
 			<div class="margin-top-20">
 				<div class="input-group col-xs-12">
@@ -82,7 +82,7 @@ $this->layout = "fuego";
 		<li class="col-xs-6">
 			<h1>
 				&nbsp;&nbsp;<?= $cal_days["this_month"]["display"]; ?> 
-				<a href="#" data-toggle="collapse" data-target=".manageDays">
+				<a href="#" class="clearSelectedDays" data-toggle="collapse" data-target=".addEvent">
 					<span class="glyphicon glyphicon-chevron-down"></span>
 				</a>
 			</h1>
@@ -111,7 +111,7 @@ $this->layout = "fuego";
 					<button class="btn btn-default btn-xs pull-right text-center" data-toggle="collapse" data-target=".viewDay"><span class="glyphicon glyphicon-menu-down"></span></button>
 				</div>
 				<div class="panel-body">
-					<div class="container-fluid panel-container collapse manageDays">
+					<div class="container-fluid panel-container collapse addEvent">
 						<div class="col-xs-2">
 							<a href="#" data-toggle="tooltip" data-placement="top" title="Set a preferred Start Time (optional)">
 								<span class="glyphicon glyphicon-time"></span>
@@ -119,19 +119,15 @@ $this->layout = "fuego";
 						</div>
 						<input type="time" class="col-xs-10 userDefaultDate saveDayData" data-date="<?= $date; ?>" data-field-name="preferred_start_time"/>
 					</div>
-					<div class="collapse in manageDays">
+					<div class="collapse in addEvent">
 						<?php 
 						if( !empty($day["Events"]) ) {
 							foreach( $day["Events"] as $event ) {
 								$event_group_id = $event["event_group_id"];
 								$color = $cal_days['eventGroups'][$event_group_id]["color"];
 								?>
-								<div class="well well-sm" id="updateEventView" style="background-color: <?= $color; ?>;" 
-									data-toggle="collapse" 
-									data-target=".viewEvent" 
+								<div class="well well-sm updateEventView" style="background-color: <?= $color; ?>;" 
 									data-event-group-id="<?= $event_group_id; ?>"
-									data-setting-field="allowMultipleDaySelect"
-									data-setting-value="true"
 								>
 									<?= $event->name; ?>
 								</div>
