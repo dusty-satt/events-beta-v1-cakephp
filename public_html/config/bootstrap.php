@@ -212,6 +212,7 @@ Type::build('timestamp')
  * Plugin::load('Migrations'); //Loads a single plugin named Migrations
  *
  */
+Plugin::load('AkkaFacebook', ['bootstrap' => false, 'routes' => true, 'autoload' => true]);
 
 /*
  * Only try to load DebugKit in development mode

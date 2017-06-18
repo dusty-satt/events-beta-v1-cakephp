@@ -1,3 +1,28 @@
+#nav2 .navbar-text {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.loginWithFacebook {
+	background-color: #4267b2;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	margin-top: -8px;
+	padding: 7px;
+	border-radius: 3px;
+}
+.loginWithFacebook:hover {
+	color: #ffffff;
+}
+.loginWithFacebook div {
+	font-family: Helvetica, Arial, sans-serif;
+	letter-spacing: .25px;
+	text-align: center;
+	text-overflow: clip;
+	white-space: nowrap;
+}
+
 .seven-cols .col-md-1,
 .seven-cols .col-sm-1,
 .seven-cols .col-xs-1,

@@ -38,6 +38,7 @@
 	<?= $this->Html->script('common.js') ?>
 </head>
 <body>
+	<?php echo $this->Facebook->initJsSDK(); ?>
 	<div class="navbar navbar-inverse">
 	  <div class="container">
 	    <div class="navbar-header">
@@ -62,11 +63,21 @@
 		    </ul>
 	    </div>
 	    <div class="collapse text-center" id="nav2">
-	      <form class="navbar-form form-inline" id="menuLoginForm">
-					<input class="form-control typeahead" placeholder="Email: " name="username" id="username" type="text">
-					<input class="form-control typeahead" placeholder="Password: " name="password" id="password" type="password">
-					<button class="btn btn-default" type="submit">Log me in!</button>
-				</form>	
+				<div class="navbar-text col-xs-6">
+					<?php 
+					echo $this->Facebook->loginLink($options = [
+						"label" => '<img class="_5h0l img" src="https://www.facebook.com/rsrc.php/v3/yC/r/aMltqKRlCHD.png" alt="app-facebook" width="24" height="24"><div style="display:inline-block;font-size:16px;margin: 0 24px 0 12px;">Log in With Facebook</div>',
+						"class" => "loginWithFacebook"
+					]);
+					?>
+				</div>
+				<div class="col-xs-6">
+					<form class="navbar-form form-inline" id="menuLoginForm">
+						<input class="form-control typeahead" placeholder="Email: " name="username" id="username" type="text">
+						<input class="form-control typeahead" placeholder="Password: " name="password" id="password" type="password">
+						<button class="btn btn-default" type="submit">Log me in!</button>
+					</form>	
+				</div>
 	    </div>
 	  </div>
 	</div>

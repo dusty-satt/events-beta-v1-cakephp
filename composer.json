@@ -1,5 +1,6 @@
 {
 	"require" : {
-		"cakephp/cakephp" : "3.4.*"
+		"cakephp/cakephp" : "3.4.*",
+		"facebook/php-sdk-v4": "4.0.*"
 	}
 }

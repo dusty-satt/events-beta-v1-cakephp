@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Routing\Router;
 
 /**
  * Application Controller
@@ -53,6 +54,20 @@ class AppController extends Controller
 						'controller' => 'Events',
 						'action' => 'index'
 					]
+				]);
+				$this->loadComponent('AkkaFacebook.Graph', [
+					'app_id' => FACEBOOK_APP_ID,
+					'app_secret' => FACEBOOK_APP_SECRET,
+					'app_scope' => 'email,public_profile', // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
+					'redirect_url' => Router::url(['controller' => 'Events', 'action' => 'index'], TRUE), // This should be enabled by default
+					'post_login_redirect' => '', //ie. Router::url(['controller' => 'Users', 'action' => 'account'], TRUE)
+					// 'user_columns' => [
+					// 	'first_name' => 'first_name', 
+					// 	'last_name' => 'last_name', 
+					// 	'username' => 'username', 
+					// 	'password' => 'password',
+					// 	'email' => 'username'
+					// ] //not required
 				]);
 				
         /*
